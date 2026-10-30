@@ -61,8 +61,10 @@ class DashboardWindow:
         self._nav_button(sidebar, "Reports", self.open_reports)
         self._nav_button(sidebar, "Wellness Advisor", self.open_wellness)
 
-        if self.account.can_manage_users:
-            self._nav_button(sidebar, "User & Audit Logs", self.show_admin_users)
+        # Keep the restricted destination visible so Standard Users can
+        # attempt to open it and receive the Access Denied message. The role
+        # check remains enforced in show_admin_users() and AdminUsersView.
+        self._nav_button(sidebar, "User & Audit Logs", self.show_admin_users)
 
         spacer = tk.Frame(sidebar, bg=self.sidebar_color)
         spacer.pack(fill="both", expand=True)
